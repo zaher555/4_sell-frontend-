@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-cart',
@@ -8,5 +10,5 @@ import { Component } from '@angular/core';
   styleUrl: './cart.component.css'
 })
 export class CartComponent {
-
+  
 }
