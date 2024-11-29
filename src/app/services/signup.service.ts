@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { User } from '../model/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +14,20 @@ export class SignupService {
     'Content-Type': 'application/json',
     // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
   });
-  getAllUsers()
+  getAllUsers():Observable <User[]>
   {
-    return this.httpClient.get(`${this.url}/users`)
+    return this.httpClient.get<User[]>(`${this.url}/users`)
   }
-  getUser(id:any)
+  getAllAdmins():Observable <User[]>
   {
-    return this.httpClient.get(`${this.url}/user/${id}`)
+    return this.httpClient.get<User[]>(`${this.url}/admins`)
   }
-  addUser(newUser:any)
+  getUser(id:any):Observable <User>
   {
-    return this.httpClient.post(`${this.url}/user/register`,newUser)
+    return this.httpClient.get<User>(`${this.url}/user/${id}`)
+  }
+  addUser(newUser:any):Observable<User>
+  {
+    return this.httpClient.post<User>(`${this.url}/user/register`,newUser)
   }
 }
