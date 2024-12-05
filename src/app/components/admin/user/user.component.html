@@ -6,25 +6,33 @@
         <div class="col-9 d-flex content justify-content-center mt-5">
             <div class="container content">
                 <h1 class="text-center pb-5">Users</h1>
-                <table class="table table-dark table-striped">
+                <a class="btn btn-dark text-warning" routerLink="/useradd">+ Add User</a>
+                <table class="table table-dark table-striped mt-2">
                     <thead>
                       <tr>
-                        <th scope="col">NO.</th>
-                        <th scope="col">name</th>
-                        <th scope="col">email</th>
-                        <th scope="col">username</th>
-                        <th scope="col">phone</th>
-                        <th scope="col">image</th>
+                        <th class="text-center text-warning">NO.</th>
+                        <th class="text-center text-warning">name</th>
+                        <th class="text-center text-warning">email</th>
+                        <th class="text-center text-warning">username</th>
+                        <th class="text-center text-warning">phone</th>
+                        <th class="text-center text-warning">image</th>
+                        <th class="text-center text-warning">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let user of users;let i=index">
-                        <th>{{i}}</th>
+                      <tr *ngFor="let user of users; let i = index; trackBy: trackById">
+                        <th>{{ i + 1 }}</th> <!-- Display row number starting from 1 -->
                         <td>{{ user.name }}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.username}}</td>
-                        <td>{{user.phone}}</td>
-                        <td>{{user.img}}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.img }}</td>
+                        <td>
+                          <a class="btn btn-success" [routerLink]="['/userboard/',user.id]">view</a>
+                          <a class="btn btn-warning ms-2" [routerLink]="['/userupdate/',user.id]">update</a>
+                          <button class="btn btn-danger ms-2" (click)="deleteUser(user.id)">delete</button>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
             </div>

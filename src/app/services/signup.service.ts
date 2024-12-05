@@ -26,8 +26,16 @@ export class SignupService {
   {
     return this.httpClient.get<User>(`${this.url}/user/${id}`)
   }
-  addUser(newUser:any):Observable<User>
+  addUser(newUser:any)
   {
-    return this.httpClient.post<User>(`${this.url}/user/register`,newUser)
+    return this.httpClient.post(`${this.url}/user/register`,newUser)
+  }
+  updateUser(id:any,newUser:any):Observable<User>
+  {
+    return this.httpClient.put<User>(`${this.url}/user/update/${id}`,newUser)
+  }
+  deleteUser(id:any):Observable<User>
+  {
+    return this.httpClient.delete<User>(`${this.url}/user/delete/${id}`)
   }
 }

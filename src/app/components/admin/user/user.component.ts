@@ -1,3 +1,4 @@
+import { Router, RouterLink } from '@angular/router';
 import { SignupService } from './../../../services/signup.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SidebarComponent } from "../sidebar/sidebar.component";
@@ -8,14 +9,14 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [SidebarComponent,CommonModule],
+  imports: [SidebarComponent,CommonModule,RouterLink],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent implements OnInit {
   users:User[]=[]
   cancelSubscription!:Subscription
-  constructor(private signupService:SignupService){}
+  constructor(private signupService:SignupService,private router:Router){}
   ngOnInit(): void {
     this.getAllUsers();
   }
@@ -31,5 +32,19 @@ export class UserComponent implements OnInit {
       })
     })
   }
-
+  deleteUser(userId:any)
+  {
+    this.signupService.deleteUser(userId).subscribe({
+      next:((response:any)=>{
+        this.users=this.users.filter((user)=>user.id != userId);
+      }),
+      error:((err)=>{
+        window.location.reload();
+      })
+    })
+  }
+  trackById(index: number, user: any): number {
+    return user.id; // Return the unique identifier for each user
+  }
+  
 }

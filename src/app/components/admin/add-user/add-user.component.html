@@ -1,0 +1,54 @@
+<div class="container border p-5 mt-5 w-50 bg-dark">
+    <form [formGroup]="registerForm" (submit)="addUser(registerForm.value)">
+        <h1 class="text-center pb-5 text-warning">New User</h1>
+            <div class="mb-3">
+                <label for="name" class="form-label text-warning">Full Name (First and Last)</label>
+                <input id="name" formControlName="name" class="form-control"/>
+            </div>
+            <div *ngIf="registerForm.get('name')?.errors && registerForm.get('name')?.touched" class="text-danger">
+                <small *ngIf="registerForm.get('email')?.getError('required')" class="text-danger">
+                    * Please enter a valid name (First Last).
+                </small>
+            </div>
+        <div class="mb-3">
+            <label for="email" class="form-label text-warning">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email" name="email">
+        </div>
+        <div *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+            <small *ngIf="registerForm.get('email')?.getError('required')" class="text-danger">* email is required</small>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label text-warning">User Name</label>
+            <input type="username" class="form-control" id="username" formControlName="username" name="username">
+        </div>
+        <div *ngIf="registerForm.get('username')?.errors && registerForm.get('username')?.touched">
+            <small *ngIf="registerForm.get('username')?.getError('required')" class="text-danger">* user name is required</small>
+            <small *ngIf="registerForm.get('username')?.getError('pattern')" class="text-danger">* user name must be at least 2 charcters and at least 1 number</small>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label text-warning">Phone</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone" name="phone">
+        </div>
+        <div *ngIf="registerForm.get('phone')?.errors && registerForm.get('phone')?.touched">
+            <small *ngIf="registerForm.get('phone')?.getError('required')" class="text-danger">* phone is required</small>
+            <small *ngIf="registerForm.get('phone')?.getError('pattern')" class="text-danger">* phone must start with (010 or 011 or 012 or 015) and 8 numbers</small>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label text-warning">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password" name="password">
+        </div>
+        <div *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+            <small *ngIf="registerForm.get('password')?.getError('required')" class="text-danger">* password is required</small><br>
+            <small *ngIf="registerForm.get('password')?.getError('minlength')" class="text-danger">* password must be at least 8 charcters</small><br>
+            <small *ngIf="registerForm.get('password')?.getError('pattern')" class="text-danger">* password must be at least 3 charcters with at least 3 numbers</small>
+        </div>
+        <div class="mb-3">
+            <label for="img" class="form-label text-warning">Upload Photo</label>
+            <input class="form-control" type="file" id="img" formControlName="img" name="img">
+        </div>
+        <div *ngIf="registerForm.get('img')?.errors && registerForm.get('img')?.touched">
+            <small *ngIf="registerForm.get('img')?.getError('required')" class="text-danger">* image is required</small>
+        </div>
+        <button class="btn btn-warning pe-5 ps-5 d-block m-auto" type="submit" [disabled]="registerForm.invalid">Add</button>
+    </form>
+</div>
